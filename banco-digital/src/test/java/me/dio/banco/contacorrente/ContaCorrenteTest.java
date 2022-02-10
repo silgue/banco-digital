@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import me.dio.banco.dominio.Banco;
-import me.dio.banco.dominio.Cliente;
 import me.dio.banco.dominio.ContaCorrente;
 import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
 import me.dio.banco.util.ClienteException;

@@ -11,5 +11,10 @@ public class OperacoesClientes {
 		Cliente cliente = new Cliente(nome, cpf, idade, remuneracaoMensal);
 		banco.getClientes().add(cliente);
 	}
+	
+	public void cadastrarMassaDados(Banco banco) throws ClienteException {
+		cadastrarCliente(banco, "Josinaldo Gomes", "01352164891", 40, 5000.00);
+		cadastrarCliente(banco, "Francineide Alves", "04251687041", 36, 6000.00);
+	}
 
 }

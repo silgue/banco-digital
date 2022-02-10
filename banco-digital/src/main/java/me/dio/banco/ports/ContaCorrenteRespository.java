@@ -2,7 +2,6 @@ package me.dio.banco.ports;
 
 import me.dio.banco.dominio.Banco;
 import me.dio.banco.dominio.Cliente;
-import me.dio.banco.dominio.Conta;
 import me.dio.banco.dominio.ContaCorrente;
 import me.dio.banco.util.ClienteException;
 

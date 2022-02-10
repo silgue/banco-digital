@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import me.dio.banco.dominio.Banco;
 import me.dio.banco.dominio.Cliente;
-import me.dio.banco.dominio.ContaCorrente;
 import me.dio.banco.ports.ClienteRepository;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.ValidadorUtil;

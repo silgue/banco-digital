@@ -1,7 +1,5 @@
 package me.dio.banco.dominio;
 
-import me.dio.banco.util.ClienteException;
-
 public class ContaCorrente extends Conta{
 	
 	private CartaoCredito cartao;

@@ -32,4 +32,15 @@ public class ContaPoupancaRepositoryImpl implements ContaPoupancaRepository{
 		banco.getContasPoupanca().add(conta);
 		return conta;
 	}
+
+	public ContaPoupanca buscarConta(Banco banco, Integer numeroConta) {
+		
+		for(ContaPoupanca conta : banco.getContasPoupanca()) {
+			if(conta.getNumero() == numeroConta){
+				return conta;
+			}
+		}
+		
+		return null;
+	}
 }

@@ -4,8 +4,13 @@ import java.beans.ExceptionListener;
 
 public class ClienteException extends Throwable implements ExceptionListener{
 	
+	private static final long serialVersionUID = 1L;
+	
+	private String msg;
+	
 	public ClienteException(String mensagem) {
-		System.out.println(mensagem);
+		msg = mensagem;
+		System.out.println(msg);
 	}
 
 	public void exceptionThrown(Exception e) {
