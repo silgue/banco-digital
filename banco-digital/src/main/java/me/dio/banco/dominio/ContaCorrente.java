@@ -1,5 +1,5 @@
 package me.dio.banco.dominio;
 
-public class ContaCorrente {
+public class ContaCorrente extends Conta{
 
 }
