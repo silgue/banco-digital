@@ -34,12 +34,6 @@ public class ClienteRepositoryImpl implements ClienteRepository {
 
 	public Cliente buscaClientePeloCPF(Banco banco, String cpf) throws ClienteException {
 
-		for (ContaCorrente conta : banco.getContasCorrente()) {
-			if (conta.getCliente().getCpf().equals(cpf)) {
-				throw new ClienteException();
-			}
-		}
-
 		for (Cliente cliente : banco.getClientes()) {
 			if (cliente.getCpf().equals(cpf)) {
 				return cliente;

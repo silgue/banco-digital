@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import me.dio.banco.dominio.Banco;
 import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
+import me.dio.banco.repository.ContaPoupancaRepositoryImpl;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.ValidadorUtil;
 
@@ -18,6 +19,8 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 
 		boolean menu = true;
+		String cpf = "";
+		
 		while (menu) {
 			System.out.println("Pressione Enter para continuar...");
 			scan.nextLine();
@@ -30,16 +33,24 @@ public class Main {
 			switch (opcao) {
 			case 1:
 				System.out.println("Informe o CPF do Cliente: \n");
-				String cpf = scan.nextLine();
+				cpf = scan.nextLine();
 				try {
 					ContaCorrenteRepositoryImpl conta = new ContaCorrenteRepositoryImpl();
 					conta.extrato(conta.cadastrarConta(banco, cpf));
 				} catch (ClienteException c) {
-					System.out.println("Cliente já possui conta corrente");
+					System.out.println("Cliente já possui conta corrente. \n");
 				}
 
 				break;
 			case 2:
+				System.out.println("Informe o CPF do Cliente: \n");
+				cpf = scan.nextLine();
+				try {
+					ContaPoupancaRepositoryImpl conta = new ContaPoupancaRepositoryImpl();
+					conta.extrato(conta.cadastrarConta(banco, cpf));
+				} catch (ClienteException c) {
+					System.out.println("Cliente já possui conta poupança.\n");
+				}
 				break;
 			case 3:
 				break;

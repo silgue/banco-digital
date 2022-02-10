@@ -4,8 +4,12 @@ import java.beans.ExceptionListener;
 
 public class ClienteException extends Throwable implements ExceptionListener{
 	
+	public ClienteException(String mensagem) {
+		System.out.println(mensagem);
+	}
+
 	public void exceptionThrown(Exception e) {
-		System.out.println("Cliente já possui uma conta corrente");
+		System.out.println("Cliente já possui uma conta desse tipo.");
 		
 	}
 

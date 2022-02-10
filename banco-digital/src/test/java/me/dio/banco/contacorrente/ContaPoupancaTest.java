@@ -6,31 +6,29 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import me.dio.banco.dominio.Banco;
-import me.dio.banco.dominio.Cliente;
-import me.dio.banco.dominio.ContaCorrente;
-import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
+import me.dio.banco.dominio.ContaPoupanca;
+import me.dio.banco.repository.ContaPoupancaRepositoryImpl;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.OperacoesClientes;
 
-public class ContaCorrenteTest {
+public class ContaPoupancaTest {
 
 	@Test
-	public void testCriacaoContaCorrente() throws ClienteException {
+	public void testCriacaoContaPoupanca() throws ClienteException {
 
 		Banco banco = new Banco();
-		
+
 		OperacoesClientes operacaoCliente = new OperacoesClientes();
-		
+
 		operacaoCliente.cadastrarCliente(banco, "Alysson Rodrigues", "01014368405", 40, 11000.00);
 
 		String cpf = "01014368405";
 
-		ContaCorrente conta = cadastrarContaCorrente(banco, cpf);
+		ContaPoupanca conta = cadastrarContaPoupanca(banco, cpf);
 
 		int agencia = 1;
 		int numero = 1;
 		String nome = "Alysson Rodrigues";
-		double limiteCartaoCredito = 200;
 		double saldo = 0;
 		boolean teste = false;
 
@@ -46,10 +44,6 @@ public class ContaCorrenteTest {
 			teste = true;
 		else
 			teste = false;
-		if (conta.getCartao().getLimite() == limiteCartaoCredito)
-			teste = true;
-		else
-			teste = false;
 		if (conta.getSaldo() == saldo)
 			teste = true;
 		else
@@ -59,28 +53,26 @@ public class ContaCorrenteTest {
 	}
 
 	@Test(expected = ClienteException.class)
-	public void testCriacaoContaCorrenteJaExistente() throws ClienteException {
+	public void testCriacaoContaPoupancaJaExistente() throws ClienteException {
 
 		Banco banco = new Banco();
-		
+
 		OperacoesClientes operacaoCliente = new OperacoesClientes();
 
 		operacaoCliente.cadastrarCliente(banco, "Alysson Rodrigues", "01014368405", 40, 11000.00);
 
-		cadastrarContaCorrente(banco, "01014368405");
+		cadastrarContaPoupanca(banco, "01014368405");
 
-		cadastrarContaCorrente(banco, "01014368405");
+		cadastrarContaPoupanca(banco, "01014368405");
 
-		assertThrows("Cliente já possui conta corrente", null, null);
+		assertThrows("Cliente já possui conta poupança.", null, null);
 
 	}
 
-	private ContaCorrente cadastrarContaCorrente(Banco banco, String cpf) throws ClienteException {
-		
-		ContaCorrenteRepositoryImpl conta = new ContaCorrenteRepositoryImpl();
+	private ContaPoupanca cadastrarContaPoupanca(Banco banco, String cpf) throws ClienteException {
+
+		ContaPoupancaRepositoryImpl conta = new ContaPoupancaRepositoryImpl();
 		return conta.cadastrarConta(banco, cpf);
 	}
-
-	
 
 }
