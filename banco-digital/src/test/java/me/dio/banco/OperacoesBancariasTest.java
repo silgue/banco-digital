@@ -1,4 +1,4 @@
-package me.dio.banco.contacorrente;
+package me.dio.banco;
 
 import static org.junit.Assert.assertTrue;
 
