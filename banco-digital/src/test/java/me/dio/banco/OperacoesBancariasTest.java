@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import me.dio.banco.dominio.Banco;
-import me.dio.banco.dominio.Conta;
 import me.dio.banco.dominio.ContaCorrente;
 import me.dio.banco.dominio.ContaPoupanca;
 import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
@@ -73,7 +72,7 @@ public class OperacoesBancariasTest {
 
 		operacoes.depositar(TipoOperacaoConta.DEPOSITAR_CONTA_CORRENTE, banco, numeroInicioConta-1, 500.00);
 
-		ContaCorrente contaCorrente = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
+		contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
 
 	}
 
@@ -104,7 +103,7 @@ public class OperacoesBancariasTest {
 
 		operacoes.sacar(TipoOperacaoConta.SACAR_CONTA_CORRENTE, banco, numeroInicioConta, 500.00);
 
-		ContaCorrente contaCorrente = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
+		contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
 
 	}
 	
@@ -117,7 +116,7 @@ public class OperacoesBancariasTest {
 
 		operacoes.sacar(TipoOperacaoConta.SACAR_CONTA_CORRENTE, banco, numeroInicioConta-1, 500.00);
 
-		ContaCorrente contaCorrente = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
+		contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
 
 	}
 
