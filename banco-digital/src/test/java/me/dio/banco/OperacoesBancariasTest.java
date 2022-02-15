@@ -5,8 +5,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import me.dio.banco.dominio.Banco;
+import me.dio.banco.dominio.Conta;
 import me.dio.banco.dominio.ContaCorrente;
 import me.dio.banco.dominio.ContaPoupanca;
+import me.dio.banco.ports.ContaCorrenteRepository;
+import me.dio.banco.ports.ContaPoupancaRepository;
 import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
 import me.dio.banco.repository.ContaPoupancaRepositoryImpl;
 import me.dio.banco.repository.OperacoesBancariasRepositoryImpl;
@@ -25,9 +28,9 @@ public class OperacoesBancariasTest {
 
 	Banco banco = new Banco();
 
-	ContaCorrenteRepositoryImpl contaCorrenteRepository = new ContaCorrenteRepositoryImpl();
+	ContaCorrenteRepository contaCorrenteRepository = new ContaCorrenteRepositoryImpl();
 
-	ContaPoupancaRepositoryImpl contaPoupancaRepository = new ContaPoupancaRepositoryImpl();
+	ContaPoupancaRepository contaPoupancaRepository = new ContaPoupancaRepositoryImpl();
 
 	boolean teste = true;
 
@@ -40,22 +43,22 @@ public class OperacoesBancariasTest {
 
 		pegarUltimoNumeroConta(banco);
 
-		ContaCorrente contaCorrente1 = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
+		Conta contaCorrente1 = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
 
 		if (contaCorrente1.getSaldo() != 400.00)
 			teste = false;
 
-		ContaPoupanca contaPoupanca2 = contaPoupancaRepository.buscarConta(banco, ++numeroInicioConta);
+		Conta contaPoupanca2 = contaPoupancaRepository.buscarConta(banco, ++numeroInicioConta);
 
 		if (contaPoupanca2.getSaldo() != 400.00)
 			teste = false;
 
-		ContaCorrente contaCorrente3 = contaCorrenteRepository.buscarConta(banco, ++numeroInicioConta);
+		Conta contaCorrente3 = contaCorrenteRepository.buscarConta(banco, ++numeroInicioConta);
 
 		if (contaCorrente3.getSaldo() != 400.00)
 			teste = false;
 
-		ContaPoupanca contaPoupanca4 = contaPoupancaRepository.buscarConta(banco, ++numeroInicioConta);
+		Conta contaPoupanca4 = contaPoupancaRepository.buscarConta(banco, ++numeroInicioConta);
 
 		if (contaPoupanca4.getSaldo() != 400.00)
 			teste = false;
@@ -85,7 +88,7 @@ public class OperacoesBancariasTest {
 
 		operacoes.sacar(TipoOperacaoConta.SACAR_CONTA_CORRENTE, banco, numeroInicioConta, 150.00);
 
-		ContaCorrente contaCorrente = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
+		Conta contaCorrente = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
 
 		if (contaCorrente.getSaldo() != 250.00)
 			teste = false;
@@ -130,8 +133,8 @@ public class OperacoesBancariasTest {
 		operacoes.transferir(TipoOperacaoConta.TRANSFERIR_CONTA_CORRENTE_PARA_POUPANCA, banco, numeroInicioConta,
 				++numeroInicioConta, 100.00);
 
-		ContaPoupanca contaPoupancaDestino1 = contaPoupancaRepository.buscarConta(banco, numeroInicioConta);
-		ContaCorrente contaCorrenteOrigem1 = contaCorrenteRepository.buscarConta(banco, --numeroInicioConta);
+		Conta contaPoupancaDestino1 = contaPoupancaRepository.buscarConta(banco, numeroInicioConta);
+		Conta contaCorrenteOrigem1 = contaCorrenteRepository.buscarConta(banco, --numeroInicioConta);
 
 		if (contaPoupancaDestino1.getSaldo() != 500.00 || contaCorrenteOrigem1.getSaldo() != 300.00)
 			teste = false;
@@ -139,8 +142,8 @@ public class OperacoesBancariasTest {
 		operacoes.transferir(TipoOperacaoConta.TRANSFERIR_CONTA_CORRENTE_PARA_CORRENTE, banco, numeroInicioConta,
 				numeroInicioConta+2, 100.00);
 
-		ContaCorrente contaCorrenteDestino2 = contaCorrenteRepository.buscarConta(banco, numeroInicioConta+2);
-		ContaCorrente contaCorrenteOrigem2 = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
+		Conta contaCorrenteDestino2 = contaCorrenteRepository.buscarConta(banco, numeroInicioConta+2);
+		Conta contaCorrenteOrigem2 = contaCorrenteRepository.buscarConta(banco, numeroInicioConta);
 
 		if (contaCorrenteDestino2.getSaldo() != 500.00 || contaCorrenteOrigem2.getSaldo() != 200.00)
 			teste = false;

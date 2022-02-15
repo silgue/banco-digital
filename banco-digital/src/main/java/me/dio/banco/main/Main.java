@@ -3,6 +3,7 @@ package me.dio.banco.main;
 import java.util.Scanner;
 
 import me.dio.banco.dominio.Banco;
+import me.dio.banco.ports.OperacoesBancariasRepository;
 import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
 import me.dio.banco.repository.ContaPoupancaRepositoryImpl;
 import me.dio.banco.repository.OperacoesBancariasRepositoryImpl;
@@ -18,7 +19,7 @@ public class Main {
 
 		ValidadorUtil validador = new ValidadorUtil();
 
-		OperacoesBancariasRepositoryImpl operacoesBancarias = new OperacoesBancariasRepositoryImpl();
+		OperacoesBancariasRepository operacoesBancarias = new OperacoesBancariasRepositoryImpl();
 
 		Scanner scan = new Scanner(System.in);
 
@@ -39,7 +40,8 @@ public class Main {
 							+ "7 - Transferência entre contas correntes. \n"
 							+ "8 - Transferir da conta corrente para conta poupança. \n"
 							+ "9 - Transferência entre contas poupança. \n"
-							+ "10 - Transferir da conta poupança para uma conta concorrente. \n" + "11 - Sair",
+							+ "10 - Transferir da conta poupança para uma conta concorrente. \n" 
+							+ "11 - Extrato Conta Corrente. \n" + "12 - Extrato Conta Poupança. \n" + "13 - Sair. \n",
 					opcao, scan);
 			switch (opcao) {
 			case 1:
@@ -178,6 +180,26 @@ public class Main {
 				}
 				break;
 			case 11:
+				System.out.println("Informe o número da conta Corrente: \n");
+				numeroContaDestino = Integer.parseInt(scan.nextLine());
+				try {
+					operacoesBancarias.extrato(TipoOperacaoConta.EXTRATO_CONTA_CORRENTE, banco, numeroContaDestino);
+				} catch (ClienteException c) {
+					c.getMessage();
+				}
+				
+				break;
+			case 12:
+				System.out.println("Informe o número da conta Poupança: \n");
+				numeroContaDestino = Integer.parseInt(scan.nextLine());
+				try {
+					operacoesBancarias.extrato(TipoOperacaoConta.EXTRATO_CONTA_POUPANCA, banco, numeroContaDestino);
+				} catch (ClienteException c) {
+					c.getMessage();
+				}
+				
+				break;
+			case 13:
 				menu = false;
 				scan.close();
 				break;

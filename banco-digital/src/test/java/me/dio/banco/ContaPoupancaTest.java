@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import me.dio.banco.dominio.Banco;
 import me.dio.banco.dominio.ContaPoupanca;
+import me.dio.banco.ports.ContaPoupancaRepository;
 import me.dio.banco.repository.ContaPoupancaRepositoryImpl;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.OperacoesClientes;
@@ -71,7 +72,7 @@ public class ContaPoupancaTest {
 
 	private ContaPoupanca cadastrarContaPoupanca(Banco banco, String cpf) throws ClienteException {
 
-		ContaPoupancaRepositoryImpl conta = new ContaPoupancaRepositoryImpl();
+		ContaPoupancaRepository conta = new ContaPoupancaRepositoryImpl();
 		return conta.cadastrarConta(banco, cpf);
 	}
 

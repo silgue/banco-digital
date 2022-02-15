@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import me.dio.banco.dominio.Banco;
 import me.dio.banco.dominio.ContaCorrente;
+import me.dio.banco.ports.ContaCorrenteRepository;
 import me.dio.banco.repository.ContaCorrenteRepositoryImpl;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.OperacoesClientes;
@@ -76,7 +77,7 @@ public class ContaCorrenteTest {
 
 	private ContaCorrente cadastrarContaCorrente(Banco banco, String cpf) throws ClienteException {
 		
-		ContaCorrenteRepositoryImpl conta = new ContaCorrenteRepositoryImpl();
+		ContaCorrenteRepository conta = new ContaCorrenteRepositoryImpl();
 		return conta.cadastrarConta(banco, cpf);
 	}
 

@@ -3,31 +3,25 @@ package me.dio.banco.repository;
 import me.dio.banco.dominio.Banco;
 import me.dio.banco.dominio.Cliente;
 import me.dio.banco.dominio.ContaCorrente;
-import me.dio.banco.ports.ContaCorrenteRespository;
+import me.dio.banco.ports.ClienteRepository;
+import me.dio.banco.ports.ContaCorrenteRepository;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.TipoOperacaoConta;
 import me.dio.banco.util.ValidadorUtil;
 
-public class ContaCorrenteRepositoryImpl implements ContaCorrenteRespository {
-
-	ContaRepositoryImpl contaRepository = new ContaRepositoryImpl();
+public class ContaCorrenteRepositoryImpl implements ContaCorrenteRepository {
 
 	ValidadorUtil validador = new ValidadorUtil();
 
-	public void extrato(ContaCorrente conta) {
-		contaRepository.extrato(conta);
-		System.out.println("Limite Cartão de Crédito: R$ " + conta.getCartao().getLimite());
-	}
-
 	public void cadastrarConta(Banco banco, Cliente cliente) throws ClienteException {
-		ClienteRepositoryImpl clienteRepository = new ClienteRepositoryImpl();
+		ClienteRepository clienteRepository = new ClienteRepositoryImpl();
 		validador.verificaSePossuiConta(TipoOperacaoConta.CADASTRAR_CONTA_CORRENTE, banco, cliente);
 		ContaCorrente conta = new ContaCorrente(banco, clienteRepository.buscaClientePeloCPF(banco, cliente.getCpf()));
 		banco.getContasCorrente().add(conta);
 	}
 
 	public ContaCorrente cadastrarConta(Banco banco, String cpf) throws ClienteException {
-		ClienteRepositoryImpl clienteRepository = new ClienteRepositoryImpl();
+		ClienteRepository clienteRepository = new ClienteRepositoryImpl();
 		validador.verificaSePossuiConta(TipoOperacaoConta.CADASTRAR_CONTA_CORRENTE, banco,
 				clienteRepository.buscaClientePeloCPF(banco, cpf));
 		ContaCorrente conta = new ContaCorrente(banco, clienteRepository.buscaClientePeloCPF(banco, cpf));
@@ -55,5 +49,17 @@ public class ContaCorrenteRepositoryImpl implements ContaCorrenteRespository {
 		}
 		if (!contaExiste)
 			throw new ClienteException("Conta não encontrada. \n");
+	}
+
+	@Override
+	public void extrato(ContaCorrente conta) {
+		System.out.println("===EXTRATO CONTA===");
+		System.out.println("Nome: " + conta.getCliente().getNome());
+		System.out.println("CPF: " + conta.getCliente().getCpf());
+		System.out.println("Agência: " + conta.getAgencia());
+		System.out.println("Número da conta: " + conta.getNumero());
+		System.out.println("Saldo da Conta: " + conta.getSaldo());
+		System.out.println("Limite Cartão de Crédito: R$ " + conta.getCartao().getLimite());
+		System.out.println("===FIM EXTRATO===");
 	}
 }

@@ -1,23 +1,24 @@
 package me.dio.banco.repository;
 
 import me.dio.banco.dominio.Banco;
-import me.dio.banco.dominio.ContaCorrente;
-import me.dio.banco.dominio.ContaPoupanca;
+import me.dio.banco.dominio.Conta;
+import me.dio.banco.ports.ContaCorrenteRepository;
+import me.dio.banco.ports.ContaPoupancaRepository;
 import me.dio.banco.ports.OperacoesBancariasRepository;
 import me.dio.banco.util.ClienteException;
 import me.dio.banco.util.TipoOperacaoConta;
 
 public class OperacoesBancariasRepositoryImpl implements OperacoesBancariasRepository{
 
-	ContaCorrenteRepositoryImpl contaCorrenteRepositorio = new ContaCorrenteRepositoryImpl();
-	ContaPoupancaRepositoryImpl contaPoupancaRepositorio = new ContaPoupancaRepositoryImpl();
+	ContaCorrenteRepository contaCorrenteRepositorio = new ContaCorrenteRepositoryImpl();
+	ContaPoupancaRepository contaPoupancaRepositorio = new ContaPoupancaRepositoryImpl();
 
 	public void sacar(TipoOperacaoConta tipo, Banco banco, Integer numeroConta, Double valor) throws ClienteException {
 		if (tipo == TipoOperacaoConta.SACAR_CONTA_CORRENTE) {
-			ContaCorrente conta = contaCorrenteRepositorio.buscarConta(banco, numeroConta);
+			Conta conta = contaCorrenteRepositorio.buscarConta(banco, numeroConta);
 			conta.sacar(conta, valor);
 		} else if (tipo == TipoOperacaoConta.SACAR_CONTA_POUPANÇA) {
-			ContaPoupanca conta = contaPoupancaRepositorio.buscarConta(banco, numeroConta);
+			Conta conta = contaPoupancaRepositorio.buscarConta(banco, numeroConta);
 			conta.sacar(conta, valor);
 		}
 	}
@@ -25,10 +26,10 @@ public class OperacoesBancariasRepositoryImpl implements OperacoesBancariasRepos
 	public void depositar(TipoOperacaoConta tipo, Banco banco, Integer numeroConta, Double valor)
 			throws ClienteException {
 		if (tipo == TipoOperacaoConta.DEPOSITAR_CONTA_CORRENTE) {
-			ContaCorrente conta = contaCorrenteRepositorio.buscarConta(banco, numeroConta);
+			Conta conta = contaCorrenteRepositorio.buscarConta(banco, numeroConta);
 			conta.depositar(conta, valor);
 		} else if (tipo == TipoOperacaoConta.DEPOSITAR_CONTA_POUPANCA) {
-			ContaPoupanca conta = contaPoupancaRepositorio.buscarConta(banco, numeroConta);
+			Conta conta = contaPoupancaRepositorio.buscarConta(banco, numeroConta);
 			conta.depositar(conta, valor);
 		}
 	}
